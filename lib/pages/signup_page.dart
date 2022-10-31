@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:future_job_app/pages/homepage.dart';
 import 'package:future_job_app/pages/signin_page.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -219,7 +220,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               width: 400,
                               height: 50,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                },
                                 style: TextButton.styleFrom(
                                   backgroundColor: purpleColor,
                                   shape: RoundedRectangleBorder(

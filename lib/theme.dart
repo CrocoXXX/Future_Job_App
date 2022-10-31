@@ -31,3 +31,21 @@ TextStyle buttonStyle = GoogleFonts.poppins(
   color: whiteColor,
   fontWeight: FontWeight.w500,
 );
+
+// Home Screen Text Style
+TextStyle textCategoriesStyle = GoogleFonts.poppins(
+  color: whiteColor,
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle jobStyle = GoogleFonts.poppins(
+  color: blackColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle companyStyle = GoogleFonts.poppins(
+  color: greyColor,
+  fontWeight: FontWeight.w400,
+);
