@@ -17,7 +17,7 @@ class JustPosted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 34, top: 26, right: 24),
+      padding: const EdgeInsets.only(top: 26, right: 24),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

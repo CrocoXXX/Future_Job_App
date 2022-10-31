@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:future_job_app/widgets/categories_widget.dart';
 import 'package:future_job_app/widgets/posted_widget.dart';
+import 'package:future_job_app/widgets/widgets_second/app_designer.dart';
+import 'package:future_job_app/widgets/widgets_second/content_writer.dart';
+import 'package:future_job_app/widgets/widgets_second/mobile_developer.dart';
+import 'package:future_job_app/widgets/widgets_second/video_grapher.dart';
+import 'package:future_job_app/widgets/widgets_second/website_developer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -63,61 +68,69 @@ class HomePage extends StatelessWidget {
                   children: const [
                     Categories(
                       imageUrl: 'assets/category1.png',
-                      text: 'Website \nDeveloper',
+                      text: 'Website Developer',
                     ),
                     SizedBox(width: 16),
                     Categories(
                       imageUrl: 'assets/category2.png',
-                      text: 'Mobile \nDeveloper',
+                      text: 'Mobile Developer',
                     ),
                     SizedBox(width: 16),
                     Categories(
                       imageUrl: 'assets/category3.png',
-                      text: 'App \nDesigner',
+                      text: 'App Designer',
                     ),
                     SizedBox(width: 16),
                     Categories(
                       imageUrl: 'assets/category4.png',
-                      text: 'Content \nWriter',
+                      text: 'Content Writer',
                     ),
                     SizedBox(width: 16),
                     Categories(
                       imageUrl: 'assets/category5.png',
-                      text: 'Video \nGrapher',
+                      text: 'Video Grapher',
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 24),
-              child: Text(
-                'Just Posted',
-                style: GoogleFonts.poppins(
-                  color: blackColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 30,
               ),
-            ),
-            Column(
-              children: const [
-                JustPosted(
-                  imageUrl: 'assets/icon1.png',
-                  job: 'Front-End Developer',
-                  company: 'Google',
-                ),
-                JustPosted(
-                  imageUrl: 'assets/icon2.png',
-                  job: 'UI Designer',
-                  company: 'Instagram',
-                ),
-                JustPosted(
-                  imageUrl: 'assets/icon3.png',
-                  job: 'Data Scientist',
-                  company: 'Facebook',
-                ),
-              ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Just Posted',
+                    style: GoogleFonts.poppins(
+                      color: blackColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Column(
+                    children: const [
+                      JustPosted(
+                        imageUrl: 'assets/icon1.png',
+                        job: 'Front-End Developer',
+                        company: 'Google',
+                      ),
+                      JustPosted(
+                        imageUrl: 'assets/icon2.png',
+                        job: 'UI Designer',
+                        company: 'Instagram',
+                      ),
+                      JustPosted(
+                        imageUrl: 'assets/icon3.png',
+                        job: 'Data Scientist',
+                        company: 'Facebook',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -49,3 +49,16 @@ TextStyle companyStyle = GoogleFonts.poppins(
   color: greyColor,
   fontWeight: FontWeight.w400,
 );
+
+// Widget Second Screen Text Style
+TextStyle jobTitleStyle = GoogleFonts.poppins(
+  color: whiteColor,
+  fontSize: 24,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle availableJobStyle = GoogleFonts.poppins(
+  color: whiteColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+);
