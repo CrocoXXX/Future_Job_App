@@ -15,6 +15,7 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      // page saat kembali tidak sesuai (homework)
       onTap: () {
         Navigator.push(
           context,
