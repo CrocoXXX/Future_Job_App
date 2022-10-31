@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:future_job_app/widgets/categories_widget.dart';
 import 'package:future_job_app/widgets/posted_widget.dart';
-import 'package:future_job_app/widgets/widgets_second/app_designer.dart';
-import 'package:future_job_app/widgets/widgets_second/content_writer.dart';
-import 'package:future_job_app/widgets/widgets_second/mobile_developer.dart';
-import 'package:future_job_app/widgets/widgets_second/video_grapher.dart';
-import 'package:future_job_app/widgets/widgets_second/website_developer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {

@@ -62,3 +62,25 @@ TextStyle availableJobStyle = GoogleFonts.poppins(
   fontSize: 16,
   fontWeight: FontWeight.w400,
 );
+
+// Detail Screen Text Style
+TextStyle jobDetailsStyle = GoogleFonts.poppins(
+  color: blackColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle subDetailsStyle = GoogleFonts.poppins(
+  color: greyColor,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle requirementsStyle = GoogleFonts.poppins(
+  color: blackColor,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle subrequirementsStyle = GoogleFonts.poppins(
+  color: blackColor,
+  fontWeight: FontWeight.w300,
+);
