@@ -16,20 +16,24 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const OnBoardingPage()));
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const OnBoardingPage(),
+        ),
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: purpleColor,
-      body: SafeArea(
-        child: Center(
+      backgroundColor: const Color(0xff4141A4),
+      body: Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 89, vertical: 309),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 'assets/logo.png',
