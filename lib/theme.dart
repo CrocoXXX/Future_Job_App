@@ -18,7 +18,6 @@ TextStyle splashStyle = GoogleFonts.poppins(
 TextStyle titleStyle = GoogleFonts.poppins(
   color: greyColor,
   fontSize: 16,
-  fontWeight: FontWeight.w400,
 );
 
 TextStyle subtitleStyle = GoogleFonts.poppins(
