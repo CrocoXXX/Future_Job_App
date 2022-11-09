@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/pages/detail_page.dart';
 import 'package:future_job_app/theme.dart';
 
 class PostedWidget extends StatelessWidget {
@@ -14,37 +15,47 @@ class PostedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 17),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            imageUrl,
-            width: 45,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DetailPage(),
           ),
-          const SizedBox(width: 27),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: jobStyle,
-                ),
-                Text(
-                  subtitle,
-                  style: companyStyle,
-                ),
-                const SizedBox(height: 18),
-                const Divider(
-                  color: Color(0xffECEDF1),
-                  thickness: 1,
-                ),
-              ],
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 17),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              imageUrl,
+              width: 45,
             ),
-          )
-        ],
+            const SizedBox(width: 27),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: jobStyle,
+                  ),
+                  Text(
+                    subtitle,
+                    style: companyStyle,
+                  ),
+                  const SizedBox(height: 18),
+                  const Divider(
+                    color: Color(0xffECEDF1),
+                    thickness: 1,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
