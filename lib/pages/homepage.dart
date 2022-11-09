@@ -101,6 +101,7 @@ class HomePage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
+                  const SizedBox(height: 16),
                   PostedWidget(
                     imageUrl: 'assets/icon1.png',
                     title: 'Front-End Developer',
