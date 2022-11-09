@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/pages/homepage.dart';
 import 'package:future_job_app/pages/signin_page.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +46,14 @@ class OnBoardingPage extends StatelessWidget {
                     height: 45,
                     margin: const EdgeInsets.only(top: 425),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         backgroundColor: whiteColor,
                         shape: RoundedRectangleBorder(

@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:future_job_app/pages/homepage.dart';
+import 'package:future_job_app/pages/signup_page.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -126,7 +128,14 @@ class _SignInPageState extends State<SignInPage> {
                 height: 50,
                 margin: const EdgeInsets.only(bottom: 20),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     backgroundColor: purpleColor,
                     shape: RoundedRectangleBorder(
@@ -141,7 +150,14 @@ class _SignInPageState extends State<SignInPage> {
               ),
               Align(
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpPage(),
+                      ),
+                    );
+                  },
                   child: Text(
                     'Create New Account',
                     style: GoogleFonts.poppins(
