@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:future_job_app/pages/homepage.dart';
+import 'package:future_job_app/pages/signin_page.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -234,7 +235,12 @@ class _SignUpPageState extends State<SignUpPage> {
               Align(
                 child: InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignInPage(),
+                      ),
+                    );
                   },
                   child: Text(
                     'Back to Sign In',

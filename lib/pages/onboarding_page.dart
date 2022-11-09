@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:future_job_app/pages/homepage.dart';
 import 'package:future_job_app/pages/signin_page.dart';
+import 'package:future_job_app/pages/signup_page.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -50,7 +51,7 @@ class OnBoardingPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                            builder: (context) => const SignUpPage(),
                           ),
                         );
                       },
