@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/models/category_model.dart';
+import 'package:future_job_app/models/job_model.dart';
+import 'package:future_job_app/providers/job_provider.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:future_job_app/widgets/posted_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SecondHomePage extends StatelessWidget {
-  final String imageUrl;
-  final String jobText;
+  final CategoryModel category;
 
-  SecondHomePage({required this.imageUrl, required this.jobText});
+  SecondHomePage(this.category);
 
   @override
   Widget build(BuildContext context) {
+    var jobProvider = Provider.of<JobProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -27,8 +32,8 @@ class SecondHomePage extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         height: 270,
-                        child: Image.asset(
-                          imageUrl,
+                        child: Image.network(
+                          category.imageUrl,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -39,7 +44,7 @@ class SecondHomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            jobText,
+                            category.name,
                             style: jobTitleStyle,
                           ),
                           const SizedBox(height: 2),
@@ -66,21 +71,42 @@ class SecondHomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      PostedWidget(
-                        imageUrl: 'assets/icon1.png',
-                        title: 'Front-End Developer',
-                        subtitle: 'Google',
+                      FutureBuilder<List<JobModel>>(
+                        future: jobProvider.getJobsByCategory(category.name),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Column(
+                              children: snapshot.data!
+                                  .map(
+                                    (job) => PostedWidget(
+                                      job,
+                                    ),
+                                  )
+                                  .toList(),
+                            );
+                          }
+
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
-                      PostedWidget(
-                        imageUrl: 'assets/icon2.png',
-                        title: 'UI Designer',
-                        subtitle: 'Instagram',
-                      ),
-                      PostedWidget(
-                        imageUrl: 'assets/icon3.png',
-                        title: 'Data Scientist',
-                        subtitle: 'Facebook',
-                      ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon1.png',
+                      //   title: 'Front-End Developer',
+                      //   subtitle: 'Google',
+                      // ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon2.png',
+                      //   title: 'UI Designer',
+                      //   subtitle: 'Instagram',
+                      // ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon3.png',
+                      //   title: 'Data Scientist',
+                      //   subtitle: 'Facebook',
+                      // ),
                     ],
                   ),
                 ),
@@ -98,21 +124,42 @@ class SecondHomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      PostedWidget(
-                        imageUrl: 'assets/icon1.png',
-                        title: 'Front-End Developer',
-                        subtitle: 'Google',
+                      FutureBuilder<List<JobModel>>(
+                        future: jobProvider.getJobs(),
+                        builder: ((context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Column(
+                              children: snapshot.data!
+                                  .map(
+                                    (job) => PostedWidget(
+                                      job,
+                                    ),
+                                  )
+                                  .toList(),
+                            );
+                          }
+
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }),
                       ),
-                      PostedWidget(
-                        imageUrl: 'assets/icon2.png',
-                        title: 'UI Designer',
-                        subtitle: 'Instagram',
-                      ),
-                      PostedWidget(
-                        imageUrl: 'assets/icon3.png',
-                        title: 'Data Scientist',
-                        subtitle: 'Facebook',
-                      ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon1.png',
+                      //   title: 'Front-End Developer',
+                      //   subtitle: 'Google',
+                      // ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon2.png',
+                      //   title: 'UI Designer',
+                      //   subtitle: 'Instagram',
+                      // ),
+                      // PostedWidget(
+                      //   imageUrl: 'assets/icon3.png',
+                      //   title: 'Data Scientist',
+                      //   subtitle: 'Facebook',
+                      // ),
                     ],
                   ),
                 ),

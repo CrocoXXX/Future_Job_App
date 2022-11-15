@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/models/job_model.dart';
 import 'package:future_job_app/pages/detail_page.dart';
 import 'package:future_job_app/theme.dart';
 
 class PostedWidget extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String subtitle;
+  final JobModel job;
 
-  PostedWidget({
-    required this.imageUrl,
-    required this.title,
-    required this.subtitle,
-  });
+  PostedWidget(this.job);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +15,7 @@ class PostedWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const DetailPage(),
+            builder: (context) => DetailPage(job),
           ),
         );
       },
@@ -29,8 +24,8 @@ class PostedWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              imageUrl,
+            Image.network(
+              job.companyLogo,
               width: 45,
             ),
             const SizedBox(width: 27),
@@ -39,11 +34,11 @@ class PostedWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    job.name,
                     style: jobStyle,
                   ),
                   Text(
-                    subtitle,
+                    job.companyName,
                     style: companyStyle,
                   ),
                   const SizedBox(height: 18),

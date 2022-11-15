@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/models/job_model.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final JobModel job;
+  DetailPage(this.job);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -85,180 +87,148 @@ class _DetailPageState extends State<DetailPage> {
       );
     }
 
+    Widget header() {
+      return Container(
+        margin: const EdgeInsets.only(top: 80),
+        child: Column(
+          children: [
+            isApplied ? applyMessage() : const SizedBox(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Image.network(
+                widget.job.companyLogo,
+                width: 60,
+              ),
+            ),
+            Text(
+              widget.job.name,
+              style: jobDetailsStyle,
+            ),
+            const SizedBox(height: 2),
+            Text(
+              '${widget.job.companyName} • ${widget.job.location}',
+              style: subDetailsStyle,
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget detailItem(String text) {
+      return Container(
+        margin: const EdgeInsets.only(
+          top: 16,
+        ),
+        child: Row(
+          children: [
+            Image.asset(
+              'assets/dot.png',
+              width: 12,
+            ),
+            const SizedBox(width: 8),
+            Container(
+              width: 340,
+              child: Text(
+                text,
+                maxLines: 2,
+                softWrap: true,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget about() {
+      return Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'About the job',
+              style: requirementsStyle,
+            ),
+            Column(
+              children:
+                  widget.job.about.map((text) => detailItem(text)).toList(),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget qualifications() {
+      return Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Qualifications',
+              style: requirementsStyle,
+            ),
+            Column(
+              children: widget.job.qualifications
+                  .map((text) => detailItem(text))
+                  .toList(),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget responsibilities() {
+      return Container(
+        margin: const EdgeInsets.only(top: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Responsibilities',
+              style: requirementsStyle,
+            ),
+            Column(
+              children: widget.job.responsibilities
+                  .map((text) => detailItem(text))
+                  .toList(),
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Center(
-                child: Column(
-                  children: [
-                    isApplied ? applyMessage() : const SizedBox(),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Image.asset(
-                        'assets/icon1.png',
-                        width: 60,
+            Center(
+              child: Column(
+                children: [
+                  header(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, bottom: 50),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        about(),
+                        qualifications(),
+                        responsibilities(),
+                      ],
+                    ),
+                  ),
+                  isApplied ? cancelButton() : applyButton(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 35),
+                    child: Text(
+                      'Message Recruiter',
+                      style: GoogleFonts.poppins(
+                        color: greyColor,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
-                    Text(
-                      'Front-End Developer',
-                      style: jobDetailsStyle,
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'Google, Inc • Jakarta',
-                      style: subDetailsStyle,
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, bottom: 30, left: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'About the job',
-                            style: requirementsStyle,
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Full-Time On Site',
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Start at \$18,000 per month",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 24, bottom: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Qualifications',
-                            style: requirementsStyle,
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Candidate must possess at least a \nBachelor's Degree.",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Able to use Microsoft Office and Google \nbased service.",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Have an excellent time management, \ngood at organized and details",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 24, bottom: 50),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Responsibilities',
-                            style: requirementsStyle,
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Initiate and promote any programs, events, \ntraining, or activities.",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/dot.png',
-                                width: 12,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                "Assessing and anticipating needs and \ncollaborate with Division.",
-                                style: subrequirementsStyle,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    isApplied ? cancelButton() : applyButton(),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 35),
-                      child: Text(
-                        'Message Recruiter',
-                        style: GoogleFonts.poppins(
-                          color: greyColor,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

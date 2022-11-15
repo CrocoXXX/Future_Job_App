@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/models/category_model.dart';
 import 'package:future_job_app/pages/second_homepage.dart';
 import 'package:future_job_app/theme.dart';
 
 class CategoriesCard extends StatelessWidget {
-  final String imageUrl;
-  final String text;
+  final CategoryModel category;
 
-  CategoriesCard({required this.imageUrl, required this.text});
+  CategoriesCard(this.category);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => SecondHomePage(
-              imageUrl: imageUrl,
-              jobText: text,
+              category,
             ),
           ),
         );
@@ -25,19 +24,18 @@ class CategoriesCard extends StatelessWidget {
       child: Container(
         width: 150,
         height: 200,
+        margin: const EdgeInsets.only(right: 16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(imageUrl),
+            image: NetworkImage(category.imageUrl),
           ),
         ),
         child: Align(
           alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16, bottom: 16),
-            child: Text(
-              text,
-              style: textCategoriesStyle,
-            ),
+          child: Text(
+            category.name,
+            style: textCategoriesStyle,
           ),
         ),
       ),

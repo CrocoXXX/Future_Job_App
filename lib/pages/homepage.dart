@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:future_job_app/models/category_model.dart';
+import 'package:future_job_app/models/job_model.dart';
+import 'package:future_job_app/providers/category_provider.dart';
+import 'package:future_job_app/providers/job_provider.dart';
+import 'package:future_job_app/providers/user_provider.dart';
 import 'package:future_job_app/theme.dart';
 import 'package:future_job_app/widgets/categories_card.dart';
 import 'package:future_job_app/widgets/posted_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +17,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
+    var categoryProvider = Provider.of<CategoryProvider>(context);
+    var jobProvider = Provider.of<JobProvider>(context);
+
     Widget header() {
       return Container(
         padding: const EdgeInsets.only(top: 20, left: 24, right: 24),
@@ -24,7 +34,7 @@ class HomePage extends StatelessWidget {
                   style: titleStyle,
                 ),
                 Text(
-                  'Jason Powell',
+                  userProvider.user.name,
                   style: subtitleStyle,
                 ),
               ],
@@ -56,38 +66,55 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    CategoriesCard(
-                      imageUrl: 'assets/category1.png',
-                      text: 'Website Developer',
-                    ),
-                    const SizedBox(width: 16),
-                    CategoriesCard(
-                      imageUrl: 'assets/category2.png',
-                      text: 'Mobile Developer',
-                    ),
-                    const SizedBox(width: 16),
-                    CategoriesCard(
-                      imageUrl: 'assets/category3.png',
-                      text: 'App Designer',
-                    ),
-                    const SizedBox(width: 16),
-                    CategoriesCard(
-                      imageUrl: 'assets/category4.png',
-                      text: 'Content Writer',
-                    ),
-                    const SizedBox(width: 16),
-                    CategoriesCard(
-                      imageUrl: 'assets/category5.png',
-                      text: 'Video Grapher',
-                    ),
-                  ],
-                ),
+            Container(
+              height: 200,
+              child: FutureBuilder<List<CategoryModel>>(
+                future: categoryProvider.getCategories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    int index = -1;
+                    return ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: snapshot.data!.map((category) {
+                        index++;
+                        return Container(
+                          margin: EdgeInsets.only(left: index == 0 ? 24 : 0),
+                          child: CategoriesCard(
+                            category,
+                          ),
+                        );
+                      }).toList(),
+                      // children: [
+                      //   const SizedBox(
+                      //     width: 24,
+                      //   ),
+                      //   CategoriesCard(
+                      //     imageUrl: 'assets/category1.png',
+                      //     text: 'Website Developer',
+                      //   ),
+                      //   CategoriesCard(
+                      //     imageUrl: 'assets/category2.png',
+                      //     text: 'Mobile Developer',
+                      //   ),
+                      //   CategoriesCard(
+                      //     imageUrl: 'assets/category3.png',
+                      //     text: 'App Designer',
+                      //   ),
+                      //   CategoriesCard(
+                      //     imageUrl: 'assets/category4.png',
+                      //     text: 'Content Writer',
+                      //   ),
+                      //   CategoriesCard(
+                      //     imageUrl: 'assets/category5.png',
+                      //     text: 'Video Grapher',
+                      //   ),
+                      // ],
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 30),
@@ -104,21 +131,41 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  PostedWidget(
-                    imageUrl: 'assets/icon1.png',
-                    title: 'Front-End Developer',
-                    subtitle: 'Google',
+                  FutureBuilder<List<JobModel>>(
+                    future: jobProvider.getJobs(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Column(
+                          children: snapshot.data!
+                              .map(
+                                (job) => PostedWidget(
+                                  job,
+                                ),
+                              )
+                              .toList(),
+                        );
+                      }
+
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   ),
-                  PostedWidget(
-                    imageUrl: 'assets/icon2.png',
-                    title: 'UI Designer',
-                    subtitle: 'Instagram',
-                  ),
-                  PostedWidget(
-                    imageUrl: 'assets/icon3.png',
-                    title: 'Data Scientist',
-                    subtitle: 'Facebook',
-                  ),
+                  // PostedWidget(
+                  //   imageUrl: 'assets/icon1.png',
+                  //   title: 'Front-End Developer',
+                  //   subtitle: 'Google',
+                  // ),
+                  // PostedWidget(
+                  //   imageUrl: 'assets/icon2.png',
+                  //   title: 'UI Designer',
+                  //   subtitle: 'Instagram',
+                  // ),
+                  // PostedWidget(
+                  //   imageUrl: 'assets/icon3.png',
+                  //   title: 'Data Scientist',
+                  //   subtitle: 'Facebook',
+                  // ),
                 ],
               ),
             ),
@@ -168,13 +215,15 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              header(),
-              body(),
-            ],
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                header(),
+                body(),
+              ],
+            ),
           ),
         ),
       ),

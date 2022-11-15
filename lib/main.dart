@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:future_job_app/models/user_model.dart';
+// import 'package:future_job_app/models/user_model.dart';
 import 'package:future_job_app/pages/homepage.dart';
 import 'package:future_job_app/pages/signup_page.dart';
 import 'package:future_job_app/pages/splash_page.dart';
 import 'package:future_job_app/providers/auth_provider.dart';
+import 'package:future_job_app/providers/category_provider.dart';
+import 'package:future_job_app/providers/job_provider.dart';
 import 'package:future_job_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +28,12 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider<CategoryProvider>(
+          create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider<JobProvider>(
+          create: (context) => JobProvider(),
         ),
       ],
       child: MaterialApp(
